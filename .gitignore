@@ -1,2 +1,4 @@
 full_adder_tb
 sequential_tb
+*_tb 
+*.vcd
