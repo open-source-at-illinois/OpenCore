@@ -1,13 +1,13 @@
 module not_tb();
     reg [7:0] A;
     reg [7:0] B;
-    wire [7:0] out;
+    wire [7:0] Y;
     reg [3:0] error_cnt;
 
     not_func dut (
         .in1(A),
         .in2(B),
-        .out(out)
+        .out(Y)
     );
     task check;
         input [7:0] expected;
@@ -25,6 +25,7 @@ module not_tb();
         end
     endtask
     initial begin
+	    error_cnt = 0;
         // Test 1
         A = 8'b00000000;
         #10;
