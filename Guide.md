@@ -117,4 +117,35 @@ Use `add_tb.v` and `not_tb.v` as a reference to finish implement `xor_tb.v`
 Use the case syntax to finish the ALU in `alu.v`. The logical circuit modules have been instantiated for you. Test it against `alu_tb.v`!
 
 
-## FSM
+## FSMs and CPU
+To understand how FSMs can be implemented in Verilog, lets implement a simple
+CPU that uses our ALU and can execute basic operations. It has an 8-bit register file with 8 registers for general use. It also has `PC` (program  counter, or the address in memory the CPU is on), and `IR` (hold the data from the memory pointed to by PC)
+
+Our instructions are of the following format:
+```
+[2-bit opcode][register 1(3-bit)][register 2(3-bit)]
+```
+Which executes:
+```
+register 1 = register 1 (operation) register 2
+```
+
+Mind you, the operation can be `and`,`xor`, `not`, and `or`.
+
+In `instructions.v` is a simple module that looks at an input address and returns an instruction residing in 'memory' (but its really just a big if-statement)
+
+However, the first 8 instructions (and corresponding states) are simply loading initial values into the 8 registers in your register file.
+
+What follows are instructions that you can test and check if they execute.
+
+
+## How to use and build an FSM
+
+An FSM has two components in HDL languages:
+- Next State Logic: Use a combinational block to have the next state ready depending on your current state
+- Execution logic: Use a sequantial block to do something depending on your current state. Also remember to set some behaviour for reset and always going to the next state!
+We will discuss some intuition behind these concepts in the session!
+
+
+### Task 6:
+Finish `cpu.v` and use `gtkwave` to verify that the cpu executes the instructions correctly. Specifically, you need to implement next state logic for register load, along with logic to decide the instruction 'execution' stage you will jump to after incrementing `PC`!
