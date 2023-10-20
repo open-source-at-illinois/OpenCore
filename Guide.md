@@ -149,3 +149,17 @@ We will discuss some intuition behind these concepts in the session!
 
 ### Task 6:
 Finish `cpu.v` and use `gtkwave` to verify that the cpu executes the instructions correctly. Specifically, you need to implement next state logic for register load, along with logic to decide the instruction 'execution' stage you will jump to after incrementing `PC`!
+
+
+### CPU FSM States
+1) Load Registers (`reg[num]_load`)
+2) Load IR (`ir_load`)
+3) Increment PC (`pc_incr`) and also:
+
+ - if opcode(IR) == AND: Go to `and_exec`
+ - if opcode(IR) == XOR: Go to `xor_exec`
+ - if opcode(IR) == NOT: Go to `not_exec`
+ - if opcode(IR) == OR: Go to `or_exec`
+4) Go to `ir_load` 
+
+**If `rst` is high, reset PC to 0 and go to `reg_load`!**

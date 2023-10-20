@@ -30,7 +30,7 @@ module cpu(
         if (rst)
         begin
             PC <= 4'b0000;
-            state = ir_load;
+            state = reg0_load;
         end
         else 
         begin
